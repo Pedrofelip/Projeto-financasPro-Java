@@ -1,10 +1,10 @@
-package br.com.fiap.financaspro;
+package br.com.fiap.sistoque;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FinancasproApplicationTests {
+class SistoqueApplicationTests {
 
 	@Test
 	void contextLoads() {

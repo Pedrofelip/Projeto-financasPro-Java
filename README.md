@@ -1,43 +1,46 @@
-# FinacasPro
+# Projeto-Java-Advanced-FIAP
+Repositório destinado ao projeto do 1° semestre da matéria de Java Advanced da faculdade.
+A idéia do projeto é ser um sistema de gerenciamento de estoque de material escolar.
 
-API do Porjeto Finaças Pro
+#### Integrantes
+Igor Miguel Silva |
+ João Pedro Costa Feitosa
 
 ## Requisitos
 
-- [ ] CRUD de categorias
-- [ ] CRUD de Movimentações
-- [ ] CRUD de Usuários
-- [ ] Autenticação
-- [ ] Dashboard
+ - [ ] CRUD de categorias
+ - [ ] CRUD de Movimentações
+ - [ ] CRUD de Usuários
+ - [ ] Autenticação
+ - [ ] Dashboard
 
-## Documentaação
+ ## Documentação
 
-### Endpoints
 
-- [Listar Categoria](#listar-categorias)
-- [Cadastrar Categoria](#cadastrar-categoria)
-- [Detalhes de Categoria](#detalhes-da-categaria)
-- [Apagar Categoria](#apagar-categoria)
-- [Atualizar Categorias](#apagar-categoria)
+ ### Endpoints
 
-### Listar Categorias 
+- [Listar categorias](#listar-categorias)
+- [Cadastrar categoria](#cadastrar-categoria)
+- [Detalhes da Categoria](#detalhes-da-categoria)
+- [Apagar categoria](#apagar-categoria)
+- [Atualizar categoria](#atualizar-categoria)
 
+### Listar Categorias
 `GET` /categoria
 
 Retorna um array com todas as categorias cadastradas.
 
-#### Exemplo de Resposta
+#### Exemplo de resposta
 ```js
 [
     {
-        "id": 1,
-        "nome": "Alimentação",
-        "icone": "fast-food"
+        "nome": "Cadernos",
+        "icone": "notebook"
     },
     {
         "id": 2,
-        "nome": "Educação",
-        "icone": "book"
+        "nome": "Canetas",
+        "icone": "pen"
     }
 ]
 ```
@@ -45,68 +48,52 @@ Retorna um array com todas as categorias cadastradas.
 #### Código de Status
 
 | código | descrição
-|--------|----------
-| `200`  | Sucesso
-| `401`  | Usuário não autenticado. Realize autenticação em /login
-
----
+|--------|---------
+|200 | Categorias retornadas com sucesso
+|401 | Usuário não autenticado. Realize autenticação em /login
 
 ### Cadastrar Categoria
 
-`POST` /categoria
+`POST` /cadastrar
 
 Cadastrar uma nova categoria para o usuário logado com os dados enviados no corpo da requisição.
 
 #### Corpo da Requisição
 
 | campos | tipo | obrigatório | descrição
-|--------|----- | :--------: | ------------------
-| `nome`| string | ✔      | Nome curto para a categoria
-| `Icone`| string | ❌    | Nome do ícone conforme Maaterial Icons
-
-```js
-
-{
-    "nome": "Alimentação",
-    "icone": "fast-food"
-}
-
-```
+|--------|------|:-------------:|----------
+|nome|string|✅| Um nome curto para a categoria com pelo menos 3 caracteres
+|icone|string|❌| O nome do ícone conforme Material Icons
 
 #### Exemplo de Resposta
+
 ```js
-
 {
-    "id": 1,
-    "nome": "Alimentação",
-    "icone": "fast-food"
+    "nome": "Cadernos",
+    "icone": "notebook"
 }
-
 ```
 
 #### Código de Status
 
 | código | descrição
-|--------|----------
-| `201`  | Categoria cadastrada com sucesso
-| `400`  | Validação falhou. Verifique as regras para o corpo da requisição
-| `401`  | Usuário não autenticado. Realize autenticação em /login
+|--------|---------
+|200 | Categorias retornadas com sucesso
+|400 | Validação falhou. Verifique as regras para o corpo da requisição.
+|401 | Usuário não autenticado. Realize autenticação em /login
 
----
-
-### Detalhes da Categaria
-
+### Detalhes da Categoria
 `GET` /categoria/`{id}`
 
-Retorna os dados detalhados da categoria com o `id` informado no parâmentro de path.
+Retorna os dados detalhados da categoria com o `id` informado no parametro de path.
 
-#### Exemplo de Resposta
+### Exemplo de Resposta
 ```js
-
+//requisição para /categoria/1
 {
     "id": 1,
-    "nome": "Alimentação",
-    "icone": "fast-food"
+    "nome": "Cadernos",
+    "icone": "notebook"
 }
 ```
 
@@ -114,65 +101,49 @@ Retorna os dados detalhados da categoria com o `id` informado no parâmentro de 
 
 | código | descrição
 |--------|----------
-| `200`  | Dados da categoria retornados com sucesso
-| `401`  | Usuário não autenticado. Realize autenticação em /login
-| `404`  | Não existe a categoria com o `id` informado. Consulte lista em /categoria
+|200 | Categorias retornadas com sucesso
+|401 | Usuário não autenticado. Realize autenticação em /login
+|404 | Não existe categoria com o `id` informado. Consulte lista em /categoria
 
 ### Apagar Categoria
 
-`DELETE` /categoria/`{id}`
+`DELETE` /categoria/ `{id}`
 
-Apaga a categoria indicada pelo `id` enviado no parâmetro de path.
+Apaga a categoria indicada pelo `id` enviado no parametro de path. 
 
 #### Código de Status
 
 | código | descrição
 |--------|----------
-| `204`  | Categoria apagada con suceso
-| `401`  | Usuário não autenticado. Realize autenticação em /login
-| `404`  | Não existe a categoria com o `id` informado. Consulte lista em /categoria
-
----
+|204 | Categoria apagada com sucesso.
+|401 | Usuário não autenticado. Realize autenticação em /login
+|404 | Não existe categoria com o `id` informado. Consulte lista em /categoria
 
 ### Atualizar Categoria
 
-`PATCH` /categoria/`{id}`
+`PUT` /categoria/`{id}`
 
-Atualizar os dados daa categoria com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
+Atualizar os dados da categoria com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
 
 #### Corpo da Requisição
 
 | campos | tipo | obrigatório | descrição
-|--------|----- | :--------: | ------------------
-| `nome`| string | ✔      | Nome curto para a categoria
-| `Icone`| string | ❌    | Nome do ícone conforme Maaterial Icons
+|--------|------|:-------------:|----------
+|nome|string|✅| Um nome curto para a categoria com pelo menos 3 caracteres
+|icone|string|❌| O nome do ícone conforme Material Icons
 
 ```js
-
 {
-    "nome": "Alimentação",
-    "icone": "fast-food"
+    "nome": "Cadernos",
+    "icone": "notebook"
 }
-
-```
-
-#### Exemplo de Resposta
-
-```js
-
-{
-    "id": 1,
-    "nome": "Alimentação",
-    "icone": "fast-food"
-}
-
 ```
 
 #### Código de Status
 
 | código | descrição
 |--------|----------
-| `200`  | Categoria apagada con suceso
-| `401`  | Usuário não autenticado. Realize autenticação em /login
-| `400`  | Validação falhou. Verifique as regras para o corpo da requisição
-| `404`  | Não existe a categoria com o `id` informado. Consulte lista em /categoria
+|200 | Categoria atualizada com sucesso.
+|400 | Validação falhou. Verifique as regras para o corpo da requisição
+|401 | Usuário não autenticado. Realize autenticação em /login
+|404 | Não existe categoria com o `id` informado. Consulte lista em /categoria
